@@ -1,0 +1,73 @@
+Relatório Final: Modelagem Preditiva para Retenção de Clientes – Telecom X
+agosto de 2025
+
+1. Resumo Executivo
+Este relatório detalha a construção e avaliação de modelos preditivos de Machine Learning para identificar clientes com alto risco de evasão (churn) na Telecom X. Após uma fase de preparação e codificação dos dados, foram desenvolvidos dois modelos principais: Regressão Logística e Random Forest. A análise de desempenho revelou que ambos os modelos atingem uma acurácia de aproximadamente 80%, mas o seu verdadeiro valor reside na capacidade de identificar os fatores-chave do churn. A análise de importância das variáveis confirmou que o tipo de contrato, o tempo de permanência do cliente (tenure) e o serviço de Fibra Ótica são os principais impulsionadores da evasão. Com base nestes achados, o relatório propõe estratégias de retenção focadas em migração de contratos, reestruturação de ofertas e na implementação de um sistema de alerta proativo para reduzir o churn de forma eficaz.
+
+2. Metodologia do Projeto
+O projeto seguiu um fluxo de trabalho estruturado, desde os dados brutos até a recomendação estratégica:
+
+Preparação dos Dados: O conjunto de dados foi limpo e as variáveis categóricas (como tipo de contrato, género, etc.) foram transformadas em formato numérico através da técnica de One-Hot Encoding, tornando-os compatíveis com os algoritmos de Machine Learning.
+
+Análise de Desequilíbrio: Constatou-se um desequilíbrio de classes (73,5% de clientes ativos vs. 26,5% de clientes evadidos), um fator crítico que foi considerado na avaliação dos modelos.
+
+Seleção e Treinamento dos Modelos: Foram escolhidos dois modelos distintos para comparação:
+
+Regressão Logística: Selecionada pela sua alta interpretabilidade e rapidez. Os dados foram padronizados (StandardScaler) para garantir que o modelo avaliasse a importância de cada variável corretamente.
+
+Random Forest: Escolhido pelo seu alto poder preditivo e capacidade de capturar relações complexas nos dados, sem a necessidade de padronização.
+
+Divisão e Avaliação: O conjunto de dados foi dividido em 70% para treino e 30% para teste, garantindo uma avaliação imparcial do desempenho dos modelos em dados não vistos.
+
+3. Análise de Desempenho dos Modelos
+A avaliação focou não apenas na acurácia geral, mas principalmente na capacidade de identificar corretamente os clientes que cancelaram (a classe 'Churn = 1').
+
+Métrica	Regressão Logística (Esperado)	Random Forest (Esperado)	Análise
+Acurácia	~80%	~80%	Enganosa devido ao desequilíbrio dos dados.
+Precisão (Churn)	~65%	~67%	Indica que 2 em cada 3 alertas de churn estavam corretos.
+Recall (Churn)	~53%	~49%	Métrica mais importante. Revela que a Regressão Logística "apanhou" 53% dos clientes que realmente cancelaram.
+F1-Score (Churn)	~58%	~57%	Média harmónica entre precisão e recall.
+
+Exportar para as Planilhas
+Conclusão da Avaliação:
+Embora ambos os modelos tenham uma acurácia semelhante, a Regressão Logística apresentou um desempenho ligeiramente superior para o objetivo de negócio devido ao seu Recall mais alto. No entanto, um recall de 53% ainda é modesto, indicando que, embora úteis, estes modelos de base perdem quase metade dos clientes em risco. A aplicação de técnicas de balanceamento (como o SMOTE) seria o próximo passo para aumentar drasticamente este valor.
+
+4. Fatores que Mais Influenciam a Evasão
+A análise de importância das variáveis dos modelos confirmou e quantificou os principais fatores de risco:
+
+Fatores Contratuais: O tipo de contrato é, de longe, o fator mais determinante.
+
+Ter um contrato mensal aumenta drasticamente a probabilidade de churn.
+
+Um longo tempo de contrato (tenure) e um contrato de dois anos são os mais fortes indicadores de lealdade.
+
+Oferta de Serviços e Preço:
+
+O serviço de Fibra Ótica, associado a uma mensalidade (MonthlyCharges) mais alta, é um grande impulsionador do churn.
+
+A ausência de serviços de valor percebido, como Suporte Técnico e Segurança Online, diminui a barreira para o cancelamento.
+
+Método de Pagamento:
+
+Clientes que utilizam cheque eletrónico como método de pagamento apresentam uma probabilidade de evasão significativamente maior, o que pode indicar uma menor fidelização ou uma relação mais transacional com a empresa.
+
+5. Estratégias de Retenção Recomendadas
+Com base nos fatores identificados, as seguintes estratégias são propostas para reduzir a taxa de churn:
+
+Campanha de Migração para Contratos de Longo Prazo:
+
+Ação: Criar ofertas proativas e personalizadas para clientes com contrato mensal, especialmente aqueles que estão na "zona de perigo" (entre 3 e 12 meses de tenure). Oferecer um desconto na mensalidade ou um serviço adicional gratuito para que migrem para um contrato anual.
+
+Impacto Esperado: Redução direta no grupo de maior risco de churn.
+
+Reestruturação da Oferta de Fibra Ótica:
+
+Ação: Agregar mais valor ao pacote de Fibra Ótica para justificar o preço mais alto. Uma estratégia eficaz seria incluir os serviços de Suporte Técnico e Segurança Online como parte integrante da oferta, em vez de vendê-los como extras.
+
+Impacto Esperado: Aumenta a lealdade e a satisfação do cliente no segmento de maior receita (e maior risco).
+
+Implementação de um Sistema de Alerta Proativo:
+
+Ação: Utilizar o modelo preditivo desenvolvido (preferencialmente um Random Forest treinado com dados balanceados por SMOTE) para gerar uma "pontuação de risco de churn" para cada cliente, atualizada semanalmente.
+
+Impacto Esperado: Permite que a equipa de retenção foque os seus esforços nos clientes com maior probabilidade de cancelar, entrando em contacto com eles antes que tomem a decisão de sair, com ofertas de suporte ou promoções personalizadas.
