@@ -1,0 +1,70 @@
+Relatório Final de Análise de Evasão (Churn) – Telecom X
+agosto de 2025
+
+Foco: Da Análise Exploratória à Preparação para Modelagem Preditiva
+
+1. Introdução e Objetivo do Projeto
+Este relatório apresenta uma análise aprofundada dos dados da Telecom X, com o objetivo principal de identificar os fatores que mais contribuem para a evasão de clientes (churn). O projeto foi dividido em duas fases principais:
+
+Análise Exploratória de Dados (EDA): Para entender os padrões existentes, limpar os dados e extrair insights iniciais.
+
+Preparação para Modelagem Preditiva: Para transformar os dados e avaliar a viabilidade de se construir um modelo de Machine Learning para prever o churn futuro.
+
+2. Análise Exploratória de Dados e Principais Achados
+A taxa de churn geral da empresa foi identificada em 26,5%, um valor significativo que justifica uma investigação aprofundada.
+
+2.1. O Impacto do Contrato e do Custo
+
+A forma como o cliente contrata e paga pelo serviço é o fator mais decisivo para a sua permanência.
+
+Tipo de Contrato: Clientes com contrato mensal são o grupo de maior risco, com uma taxa de churn de 42,7%, enquanto clientes com contratos de dois anos são extremamente leais (apenas 2,8% de churn).
+
+Mensalidade (MonthlyCharges): Contas mensais mais altas estão diretamente ligadas a uma maior probabilidade de cancelamento.
+
+Serviço de Internet: O serviço de Fibra Ótica, apesar de ser premium, apresenta uma taxa de churn muito elevada (41,9%), fortemente associada às mensalidades mais altas.
+
+2.2. Análise Detalhada: Tempo de Contrato vs. Evasão
+
+A análise da variável tenure (tempo de contrato) é fundamental e revela um padrão claro. Uma visualização de boxplot mostraria:
+
+Clientes que Cancelam ('Churn Sim'): A sua "caixa" no gráfico estaria muito baixa, com uma mediana de apenas 10 meses. Isto demonstra que a grande maioria das evasões ocorre no início do ciclo de vida do cliente.
+
+Clientes que Permanecem ('Não Churn'): A sua "caixa" estaria muito mais alta, com uma mediana de 38 meses, indicando que os clientes leais têm um tempo de permanência consideravelmente maior.
+
+Conclusão: A "zona de perigo" para o churn está concentrada nos primeiros meses de serviço.
+
+2.3. Análise Detalhada: Total Gasto vs. Evasão
+
+A análise da variável TotalCharges (total gasto) oferece uma perspetiva complementar. Um boxplot desta relação mostraria:
+
+Clientes que Cancelam ('Churn Sim'): Teriam uma mediana de gastos totais mais baixa. Isto não significa que gastar pouco causa churn; pelo contrário, é uma consequência do cancelamento precoce, que os impede de acumular um valor total elevado.
+
+Clientes que Permanecem ('Não Churn'): Apresentariam uma mediana de gastos totais mais alta, pois a sua longa permanência na empresa resulta num maior valor acumulado ao longo do tempo.
+
+Conclusão: Clientes com um histórico de TotalCharges elevado são, na verdade, os mais seguros, pois isso reflete a sua lealdade e longo tempo de contrato.
+
+2.4. Perfil Demográfico e Serviços Adicionais
+
+Demografia: Clientes idosos, sem parceiro(a) e sem dependentes mostraram uma propensão significativamente maior ao cancelamento.
+
+Serviços de Suporte: A contratação de serviços como Segurança Online e Suporte Técnico demonstrou ser um fator de retenção muito forte, reduzindo a taxa de churn em mais de metade para os clientes que os possuem.
+
+3. Preparação para Modelos Preditivos
+Para que os insights se transformem em previsões, os dados foram preparados para algoritmos de Machine Learning.
+
+Codificação e Correlação: As variáveis de texto foram convertidas para formato numérico. A análise de correlação confirmou numericamente os achados da EDA: tenure e Contract_Two year foram as variáveis com a correlação negativa mais forte com o churn (ou seja, fatores de retenção), enquanto Contract_Month-to-month teve a correlação positiva mais forte (fator de risco).
+
+Análise de Desequilíbrio: Foi identificado um desequilíbrio de classes (73% 'Não Churn' vs. 27% 'Churn'). Isto é crítico, pois modelos treinados nestes dados podem ter dificuldade em prever a classe minoritária (Churn = 'Sim').
+
+Modelagem (Análise Esperada): A nossa discussão sobre a modelagem concluiu que, embora um modelo de base (como Regressão Logística ou Random Forest) tivesse uma acurácia razoável (~80%), a sua capacidade de identificar os clientes que realmente cancelam (a métrica de recall) seria baixa (em torno de 50-55%). A aplicação de técnicas de balanceamento como o SMOTE seria essencial para aumentar este recall para níveis mais úteis para o negócio (acima de 75%), tornando o modelo uma ferramenta eficaz para a equipa de retenção.
+
+4. Conclusão Final e Recomendações Estratégicas
+O perfil do cliente com maior risco de evasão na Telecom X é claro e consistente: um cliente idoso, sem laços familiares (parceiro/dependentes), com um contrato mensal recente, que paga uma mensalidade elevada por um serviço de Fibra Ótica e não se sente protegido por serviços de suporte adicionais.
+
+Recomendações:
+
+Ação Imediata em Contratos Mensais: Criar campanhas de marketing direcionadas para clientes com contratos mensais (especialmente os que têm entre 3 e 12 meses de tenure), oferecendo descontos ou vantagens para a migração para contratos anuais ou de dois anos.
+
+Rever o Pacote de Fibra Ótica: O serviço de fibra, sendo uma fonte de alto churn, deve ser revisto. Considerar agregar valor ao pacote, incluindo Segurança Online e Suporte Técnico como parte da oferta padrão para aumentar a perceção de valor e a segurança do cliente.
+
+Desenvolver um Modelo Preditivo de Churn: Utilizar os dados preparados para construir e implementar um modelo de Machine Learning (preferencialmente um Random Forest com dados balanceados por SMOTE). Este modelo deve gerar uma "pontuação de risco" semanal para cada cliente, permitindo que a equipa de retenção atue de forma proativa naqueles com maior probabilidade de cancelar.
